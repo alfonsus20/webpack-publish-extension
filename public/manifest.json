@@ -1,9 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "My React TypeScript Chrome Extension",
+  "name": "My To Do App",
   "version": "1.0",
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icons/icon-128x128.png"
+    }
   },
   "background": {
     "service_worker": "background.bundle.js"
@@ -14,5 +17,5 @@
       "js": ["content.bundle.js"]
     }
   ],
-  "permissions": ["storage", "activeTab", "notifications"]
+  "permissions": ["activeTab", "notifications"]
 }
