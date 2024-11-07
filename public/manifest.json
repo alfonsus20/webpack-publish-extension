@@ -14,5 +14,5 @@
       "js": ["content.bundle.js"]
     }
   ],
-  "permissions": ["storage", "activeTab"]
+  "permissions": ["storage", "activeTab", "notifications"]
 }
