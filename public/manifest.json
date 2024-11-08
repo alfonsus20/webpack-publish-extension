@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "My To Do App",
-  "version": "1.0",
+  "version": "1.0.1",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -17,5 +17,5 @@
       "js": ["content.bundle.js"]
     }
   ],
-  "permissions": ["activeTab", "notifications"]
+  "permissions": ["notifications"]
 }
