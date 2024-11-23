@@ -28,11 +28,10 @@ jobs:
           yarn build
       - name: Zip production extension
         run: zip -r extension-production.zip dist
-
       - name: Upload & release
         uses: mnao305/chrome-extension-upload@v5.0.0
         with:
-          file-path: dist/file.zip
+          file-path: extension-production.zip
           extension-id: kaolbiekdhlpjinfpgacadmkhiahkhne
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
