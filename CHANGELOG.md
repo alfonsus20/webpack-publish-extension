@@ -1,5 +1,11 @@
 # webpack-publish-extension
 
+## 1.1.0
+
+### Minor Changes
+
+- 0a675b7: update minor
+
 ## 1.0.4
 
 ### Patch Changes
