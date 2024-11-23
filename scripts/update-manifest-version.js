@@ -3,7 +3,7 @@ const path = require('path');
 
 // Paths to package.json and manifest.json
 const packageJsonPath = path.join(__dirname, '../package.json');
-const manifestJsonPath = path.join(__dirname, '../dist/manifest.json'); // Adjust to your build output
+const manifestJsonPath = path.join(__dirname, '../public/manifest.json'); // Adjust to your build output
 
 // Read package.json
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
