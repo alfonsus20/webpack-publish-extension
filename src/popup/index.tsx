@@ -28,7 +28,7 @@ const Popup: React.FC = () => {
       <p className="text-xl font-bold mb-4">My To Do App</p>
       <form onSubmit={handleSubmit} className="flex space-x-2 mb-4">
         <Input name="activity" required autoComplete="off" />
-        <Button type="submit" onClick={() => console.log("asdasdasda")}>
+        <Button type="submit" onClick={() => console.log("Test")}>
           Add
         </Button>
       </form>
