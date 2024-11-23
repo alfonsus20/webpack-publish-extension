@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write # Allows GitHub Actions to push changes to the repo
-      id-token: write # (If needed for GitHub environments)
-      actions: read # (If needed for accessing other actions)
+      id-token: write  
+      actions: read
     environment:
       name: production
     strategy:
