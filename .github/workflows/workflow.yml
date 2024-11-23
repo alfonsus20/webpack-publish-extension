@@ -1,5 +1,11 @@
 name: "Publish Webpack Chrome Extension"
 on:
+  workflow_dispatch:
+    inputs:
+      bump-type:
+        description: "Version bump type (major, minor, patch)"
+        required: true
+        default: "patch"
   push:
     branches:
       - main
@@ -10,6 +16,10 @@ on:
 jobs:
   build-extension:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Allows GitHub Actions to push changes to the repo
+      id-token: write # (If needed for GitHub environments)
+      actions: read # (If needed for accessing other actions)
     environment:
       name: production
     strategy:
