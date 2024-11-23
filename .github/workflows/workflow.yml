@@ -1,4 +1,4 @@
-name: "Publish Chrome Extension"
+name: "Publish Webpack Chrome Extension"
 on:
   push:
     branches:
