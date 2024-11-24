@@ -1,5 +1,11 @@
 # webpack-publish-extension
 
+## 1.1.1
+
+### Patch Changes
+
+- bc5ec6a: just patch example
+
 ## 1.1.0
 
 ### Minor Changes
