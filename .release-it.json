@@ -12,8 +12,5 @@
       "out": "public/manifest.json"
     }
   },
-  "npm": {
-    "versionArgs": ["--allow-same-version"],
-    "ignoreVersion": true
-  }
+  "npm": false
 }
