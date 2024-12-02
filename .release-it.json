@@ -10,6 +10,9 @@
     "@release-it/bumper": {
       "in": "public/manifest.json",
       "out": "public/manifest.json"
+    },
+    "@release-it/keep-a-changelog": {
+      "filename": "CHANGELOG.md"
     }
   },
   "npm": false
