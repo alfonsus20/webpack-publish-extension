@@ -13,6 +13,7 @@
     }
   },
   "npm": {
-    "versionArgs": ["--allow-same-version"]
+    "versionArgs": ["--allow-same-version"],
+    "ignoreVersion": true
   }
 }
