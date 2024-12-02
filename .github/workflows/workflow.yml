@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write # Allows GitHub Actions to push changes to the repo
-      id-token: write  
+      id-token: write
       actions: read
     environment:
       name: production
@@ -37,27 +37,19 @@ jobs:
       - name: Determine version bump type
         id: bump_type
         run: echo "BUMP_TYPE=${{ github.event.inputs.bump-type }}" >> $GITHUB_ENV
-      - name: Bump version in package.json
+      - name: Bump version
         run: |
-          if [[ "${BUMP_TYPE}" == "major" ]]; then
-            yarn version --major --no-git-tag-version
-          elif [[ "${BUMP_TYPE}" == "minor" ]]; then
-            yarn version --minor --no-git-tag-version
-          else
-            yarn version --patch --no-git-tag-version
-          fi
+          npm run release --ci
         shell: bash
-      - name: Update manifest version
-        run: node scripts/update-manifest-version.js
-      - name: Commit and push version update
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add package.json public/manifest.json
-          git commit -m "chore: Bump version to $(cat package.json | jq -r '.version')"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Commit and push version update
+      #   run: |
+      #     git config user.name "GitHub Actions"
+      #     git config user.email "actions@github.com"
+      #     git add package.json public/manifest.json
+      #     git commit -m "chore: Bump version to $(cat package.json | jq -r '.version')"
+      #     git push
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build extension
         run: yarn build
       - name: Zip production extension
