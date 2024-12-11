@@ -71,3 +71,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           BUMP_TYPE: ${{ github.event.inputs.bump-type }}
+
+      - name: Commit changelog
+        run: |
+          git add CHANGELOG.md
+          git commit -m "chore: update changelog for version bump"
+          git push
