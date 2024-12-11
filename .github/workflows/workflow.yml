@@ -65,9 +65,8 @@ jobs:
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
-          publish: true
 
       - name: Release It
-        run: npm run release --ci ${{ inputs.bump_type }}
+        run: npm run release --ci $BUMP_TYPE
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
