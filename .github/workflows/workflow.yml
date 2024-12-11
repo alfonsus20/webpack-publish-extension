@@ -37,7 +37,7 @@ jobs:
         run: echo "BUMP_TYPE=${{ github.event.inputs.bump-type }}" >> $GITHUB_ENV
       - run: npm run release --ci ${{ inputs.bump_type }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Build extension
         run: yarn build
       - name: Zip production extension
