@@ -1,0 +1,47 @@
+# Node.js dependencies
+node_modules/
+dist*
+build/
+.cache/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# TypeScript
+*.tsbuildinfo
+
+# Vite
+.vite
+
+# Coverage reports
+coverage/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE-specific files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Temporary files
+*.swp
+*.tmp
+
+# GitHub Actions
+.github/workflows/*.log
+.github/workflows/*.sh
+
+# Storybook
+.storybook-static/
+
+# Chrome Extension
+extension_dist/

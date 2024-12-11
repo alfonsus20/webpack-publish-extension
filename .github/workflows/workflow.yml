@@ -1,0 +1,85 @@
+name: "Publish Webpack Chrome Extension Production"
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump-type:
+        description: "Version bump type (major, minor, patch)"
+        required: true
+        default: "patch"
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      publish:
+        description: "Publish the extension to the Chrome Web Store"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - true
+          - false
+
+jobs:
+  build-extension:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Set bump type
+        id: bump_type
+        run: echo "BUMP_TYPE=${{ github.event.inputs.bump-type }}" >> $GITHUB_ENV
+
+      - name: Build extension
+        run: yarn build
+
+      - name: Zip production extension
+        run: zip -r extension-production.zip dist
+
+      - name: Generate changelog
+        id: changelog
+        run: npx auto-changelog -p
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Commit changelog
+        run: |
+          git add CHANGELOG.md
+          git commit -m "chore: update changelog for version bump"
+          git push
+
+      - name: Upload & release
+        if: ${{ github.event.inputs.publish == 'true' }}
+        uses: mnao305/chrome-extension-upload@v5.0.0
+        with:
+          file-path: extension-production.zip
+          extension-id: kaolbiekdhlpjinfpgacadmkhiahkhne
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+
+      - name: Release It
+        run: npm run release --ci $BUMP_TYPE
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          BUMP_TYPE: ${{ github.event.inputs.bump-type }}
