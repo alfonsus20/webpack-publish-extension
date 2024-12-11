@@ -46,7 +46,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Determine version bump type
+      - name: Set bump type
         id: bump_type
         run: echo "BUMP_TYPE=${{ github.event.inputs.bump-type }}" >> $GITHUB_ENV
 
@@ -70,3 +70,4 @@ jobs:
         run: npm run release --ci $BUMP_TYPE
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          BUMP_TYPE: ${{ github.event.inputs.bump-type }}
