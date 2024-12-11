@@ -1,4 +1,4 @@
-name: "Publish Webpack Chrome Extension"
+name: "Publish Webpack Chrome Extension Staging"
 on:
   workflow_dispatch:
     inputs:
@@ -6,19 +6,17 @@ on:
         description: "Version bump type (major, minor, patch)"
         required: true
         default: "patch"
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - staging/**
-
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 jobs:
   build-extension:
     runs-on: ubuntu-latest
     permissions:
       contents: write # Allows GitHub Actions to push changes to the repo
-      id-token: write  
+      id-token: write
       actions: read
     environment:
       name: production
@@ -71,3 +69,6 @@ jobs:
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
           publish: true
+      - run: npm run release --ci ${{ inputs.bump_type }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
