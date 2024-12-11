@@ -1,4 +1,4 @@
-name: "Publish Webpack Chrome Extension Staging"
+name: "Publish Webpack Chrome Extension Production"
 on:
   workflow_dispatch:
     inputs:
