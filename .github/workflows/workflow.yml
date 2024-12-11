@@ -56,6 +56,19 @@ jobs:
       - name: Zip production extension
         run: zip -r extension-production.zip dist
 
+      - name: Generate changelog
+        id: changelog
+        run: npx auto-changelog -p
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Commit changelog
+        run: |
+          git add CHANGELOG.md
+          git commit -m "chore: update changelog for version bump"
+          git push
+        if: ${{ steps.changelog.outputs.changed == 'true' }}
+
       - name: Upload & release
         if: ${{ github.event.inputs.publish == 'true' }}
         uses: mnao305/chrome-extension-upload@v5.0.0
@@ -71,9 +84,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           BUMP_TYPE: ${{ github.event.inputs.bump-type }}
-
-      - name: Commit changelog
-        run: |
-          git add CHANGELOG.md
-          git commit -m "chore: update changelog for version bump"
-          git push
