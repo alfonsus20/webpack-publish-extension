@@ -67,7 +67,6 @@ jobs:
           git add CHANGELOG.md
           git commit -m "chore: update changelog for version bump"
           git push
-        if: ${{ steps.changelog.outputs.changed == 'true' }}
 
       - name: Upload & release
         if: ${{ github.event.inputs.publish == 'true' }}
