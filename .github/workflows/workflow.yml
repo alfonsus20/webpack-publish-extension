@@ -46,21 +46,17 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Set bump type
-        id: bump_type
-        run: echo "BUMP_TYPE=${{ github.event.inputs.bump-type }}" >> $GITHUB_ENV
+      - name: Bump Version
+        run: npm run release --ci $BUMP_TYPE
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          BUMP_TYPE: ${{ github.event.inputs.bump-type }}
 
       - name: Build extension
         run: yarn build
 
       - name: Zip production extension
         run: zip -r extension-production.zip dist
-
-      - name: Release It
-        run: npm run release --ci $BUMP_TYPE
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          BUMP_TYPE: ${{ github.event.inputs.bump-type }}
 
       - name: Upload & release
         if: ${{ github.event.inputs.publish == 'true' }}
