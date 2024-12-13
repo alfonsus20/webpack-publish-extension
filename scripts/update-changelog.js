@@ -2,8 +2,8 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-const changelogPath = path.resolve(__dirname, "CHANGELOG.md");
-const version = require("./public/manifest.json").version;
+const changelogPath = path.resolve(__dirname, "../CHANGELOG.md");
+const version = require("../public/manifest.json").version;
 
 // Generate changelog for the new version
 const newChangelog = execSync(`npx auto-changelog --stdout --tag-prefix "v" --starting-version "v${version}"`, {
