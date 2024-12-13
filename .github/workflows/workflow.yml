@@ -46,11 +46,15 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Bump Version
-        run: npm run release --ci $BUMP_TYPE
+      - name: Bump Version in manifest.json
+        run: node scripts/bumpManifestVersion.js ${{ github.event.inputs.bump-type }}
+      - name: Commit and Push Changes
+        run: |
+          git add public/manifest.json
+          git commit -m "chore: bump version in manifest.json to ${{ github.event.inputs.bump-type }}"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          BUMP_TYPE: ${{ github.event.inputs.bump-type }}
 
       - name: Build extension
         run: yarn build
