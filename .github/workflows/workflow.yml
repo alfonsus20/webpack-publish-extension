@@ -23,7 +23,6 @@ on:
 
 jobs:
   build-extension:
-    if: startsWith(github.ref, 'refs/heads/main')
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -54,6 +53,7 @@ jobs:
 
       - name: Bump Version in manifest.json
         run: node scripts/bumpManifestVersion.js ${{ github.event.inputs.bump-type }}
+
       - name: Commit and Push Changes
         run: |
           git add public/manifest.json
@@ -93,5 +93,12 @@ jobs:
           git add CHANGELOG.md
           git commit -m "chore: update CHANGELOG for version $VERSION"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Create GitHub Release
+        run: |
+          VERSION=$(node -pe "require('./public/manifest.json').version")
+          gh release create "v$VERSION" --title "Release $VERSION" --notes-file CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
