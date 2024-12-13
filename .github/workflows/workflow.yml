@@ -71,3 +71,20 @@ jobs:
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
+
+      - name: Create Git Tag
+        run: |
+          VERSION=$(node -pe "require('./public/manifest.json').version")
+          git tag -a "v$VERSION" -m "Release version $VERSION"
+          git push origin "v$VERSION"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Generate Changelog
+        run: |
+          npx auto-changelog -p
+          git add CHANGELOG.md
+          git commit -m "chore: update CHANGELOG for version $(node -pe "require('./public/manifest.json').version")"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
