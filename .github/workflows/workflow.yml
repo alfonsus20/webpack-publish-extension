@@ -83,7 +83,7 @@ jobs:
       - name: Generate Changelog
         run: |
           VERSION=$(node -pe "require('./public/manifest.json').version")
-          npx auto-changelog --commit-limit false --tag-prefix "v" --starting-version "v$VERSION"
+          npx auto-changelog
           git add CHANGELOG.md
           git commit -m "chore: update CHANGELOG for version $VERSION"
           git push
