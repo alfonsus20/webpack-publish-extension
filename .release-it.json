@@ -2,7 +2,9 @@
   "$schema": "https://unpkg.com/release-it/schema/release-it.json",
   "git": {
     "commitMessage": "chore: release v${version}",
-    "changelog": "npx auto-changelog --stdout --commit-limit false -u --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs"
+    "changelog": "npx auto-changelog --stdout --commit-limit false -u --template https://raw.githubusercontent.com/release-it/release-it/main/templates/changelog-compact.hbs",
+    "requireCleanWorkingDir": true,
+    "pushArgs": ["--follow-tags -o ci.skip"]
   },
   "hooks": {
     "after:bump": "npx auto-changelog -p"
