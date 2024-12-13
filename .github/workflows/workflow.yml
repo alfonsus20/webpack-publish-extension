@@ -82,7 +82,7 @@ jobs:
 
       - name: Generate Changelog
         run: |
-          node update-changelog.js
+          node scripts/update-changelog.js
           git add CHANGELOG.md
           git commit -m "chore: update CHANGELOG for version $(node -pe "require('./public/manifest.json').version")"
           git push
