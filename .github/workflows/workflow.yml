@@ -56,17 +56,11 @@ jobs:
       - name: Zip production extension
         run: zip -r extension-production.zip dist
 
-      - name: Generate changelog
-        id: changelog
-        run: npx auto-changelog -p
+      - name: Release It
+        run: npm run release --ci $BUMP_TYPE
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      - name: Commit changelog
-        run: |
-          git add CHANGELOG.md
-          git commit -m "chore: update changelog for version bump"
-          git push
+          BUMP_TYPE: ${{ github.event.inputs.bump-type }}
 
       - name: Upload & release
         if: ${{ github.event.inputs.publish == 'true' }}
@@ -77,9 +71,3 @@ jobs:
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
-
-      - name: Release It
-        run: npm run release --ci $BUMP_TYPE
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          BUMP_TYPE: ${{ github.event.inputs.bump-type }}
