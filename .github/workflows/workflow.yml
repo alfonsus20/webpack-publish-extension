@@ -112,11 +112,13 @@ jobs:
           # Generate the changelog in JSON format with --unreleased-only
           npx auto-changelog --unreleased-only --output changes.json --template json
 
+          echo changes.json
+
           # Read the changelog JSON
           CHANGELOG=$(cat changes.json)
 
           # Extract all commits from the JSON output
-          RELEASE_NOTES=$(echo "$CHANGELOG" | jq -r '[.[] | .commits[] | ("- " + .subject + " (" + .author + ")") + "\n   " + .date + "\n   " + .href] | join("\n\n")')
+          RELEASE_NOTES=$(echo "$CHANGELOG" | jq -r '[.[] | .commits[] | ("- " + .subject + " (" + .author + ")") + "\n   " + .href] | join("\n\n")')
 
           # Debugging: Print the release notes
           echo "Release notes for version $VERSION:"
@@ -127,7 +129,6 @@ jobs:
             echo "No commits found since the last release." > current-release-notes.md
             echo "Warning: No commits found."
           else
-            echo "## Changes in $VERSION" > current-release-notes.md
             echo $RELEASE_NOTES > current-release-notes.md
           fi
 
