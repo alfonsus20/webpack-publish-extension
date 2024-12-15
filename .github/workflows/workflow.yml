@@ -95,15 +95,15 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
+          
       - name: Create GitHub Release
         run: |
-          VERSION=$(node -pe "require('./public/manifest.json').version")
-          # Extract the changelog for the current version
-          CHANGELOG_SECTION=$(awk "/^## \\[$VERSION\\]/ {flag=1; next} /^## \\[/ {flag=0} flag" CHANGELOG.md)
-          echo "$CHANGELOG_SECTION" > current-release-notes.md
-
-          # Create the GitHub release
-          gh release create "v$VERSION" --title "v$VERSION" --notes-file current-release-notes.md
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+              VERSION=$(node -pe "require('./public/manifest.json').version")
+              # Extract the changelog for the current version
+              CHANGELOG_SECTION=$(awk "/^## \\[$VERSION\\]/ {flag=1; next} /^## \\[/ {flag=0} flag" CHANGELOG.md)
+              echo "$CHANGELOG_SECTION" > current-release-notes.md
+    
+              # Create the GitHub release
+              gh release create "v$VERSION" --title "Release $VERSION" --notes-file current-release-notes.md
+          env:
+              GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
