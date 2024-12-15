@@ -127,7 +127,8 @@ jobs:
             echo "No commits found since the last release." > current-release-notes.md
             echo "Warning: No commits found."
           else
-            echo "## Changes in $VERSION\n\n$RELEASE_NOTES" > current-release-notes.md
+            echo "## Changes in $VERSION" > current-release-notes.md
+            echo $RELEASE_NOTES > current-release-notes.md
           fi
 
           # Create the GitHub release
