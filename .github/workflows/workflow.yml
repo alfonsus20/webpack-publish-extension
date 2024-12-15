@@ -78,55 +78,50 @@ jobs:
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
 
-      - name: Generate Changelog
-        run: |
-          VERSION=$(node -pe "require('./public/manifest.json').version")
-          npx auto-changelog
-          git add CHANGELOG.md
-          git commit -m "chore: update CHANGELOG for version $VERSION"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Create GitHub Release
-        run: |
-          # Extract the current version from manifest.json
-          VERSION=$(node -pe "require('./public/manifest.json').version")
-
-          # Debugging: Print the detected version
-          echo "Creating release notes for version: $VERSION"
-
-          # Get the last release tag
-          LAST_RELEASE=$(git describe --tags --abbrev=0 HEAD^)
-
-          # Debugging: Print the last release
-          echo "Last release: $LAST_RELEASE"
-
-          # Extract commits between the last release and current HEAD
-          COMMITS=$(git log "$LAST_RELEASE"..HEAD --pretty=format:"- %s (%an)")
-
-          # Debugging: Print the extracted commits
-          echo "Commits since last release:"
-          echo "$COMMITS"
-
-          # If no commits are found, use a fallback message
-          if [ -z "$COMMITS" ]; then
-            echo "No commits found since the last release ($LAST_RELEASE)" > current-release-notes.md
-            echo "Warning: No commits found."
-          else
-            # Create release notes from the commits
-            echo "## Changes in $VERSION" > current-release-notes.md
-            echo "$COMMITS" >> current-release-notes.md
-          fi
-
-          # Create the GitHub release
-          gh release create "v$VERSION" --title "Release $VERSION" --notes-file current-release-notes.md
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
       - name: Create Git Tag
         run: |
           VERSION=$(node -pe "require('./public/manifest.json').version")
           git tag -a "v$VERSION" -m "Release version $VERSION"
           git push origin "v$VERSION"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Generate Changelog
+        run: |
+          # Extract the current version from manifest.json
+          VERSION=$(node -pe "require('./public/manifest.json').version")
+
+          # Debugging: Print the detected version
+          echo "Detected version: $VERSION"
+
+          # Create a new tag for the current version
+          git tag -a "v$VERSION" -m "Release version $VERSION"
+          git push origin "v$VERSION"
+
+          # Generate or update the changelog
+          npx auto-changelog --tag "v$VERSION"
+
+          # Stage and commit the changelog
+          git add CHANGELOG.md
+          git commit -m "chore: update CHANGELOG for version $VERSION"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Create GitHub Release
+        run: |
+          # Extract the current version from manifest.json
+          VERSION=$(node -pe "require('./public/manifest.json').version")
+
+          # Extract the changelog for the current version
+          RELEASE_NOTES=$(npx auto-changelog --stdout --latest)
+
+          # Debugging: Print the release notes
+          echo "Release notes for version $VERSION:"
+          echo "$RELEASE_NOTES"
+
+          # Create the GitHub release
+          echo "$RELEASE_NOTES" > current-release-notes.md
+          gh release create "v$VERSION" --title "Release $VERSION" --notes-file current-release-notes.md
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
