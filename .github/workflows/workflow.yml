@@ -112,7 +112,7 @@ jobs:
           # Generate the changelog in JSON format with --unreleased-only
           npx auto-changelog --unreleased-only --output changes.json --template json
 
-          echo changes.json
+          cat changes.json
 
           # Read the changelog JSON
           CHANGELOG=$(cat changes.json)
