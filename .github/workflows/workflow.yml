@@ -115,8 +115,8 @@ jobs:
           # Read the changelog JSON
           CHANGELOG=$(cat changes.json)
 
-          # Extract the release notes from the JSON output
-          RELEASE_NOTES=$(echo "$CHANGELOG" | jq -r '.[0].commits | map(" - " + .subject + " (" + .author + ")\n   " + .date + "\n   " + .href) | join("\n")')
+          # Extract all commits from the JSON output
+          RELEASE_NOTES=$(echo "$CHANGELOG" | jq -r '[.[] | .commits[] | ("- " + .subject + " (" + .author + ")") + "\n   " + .date + "\n   " + .href] | join("\n\n")')
 
           # Debugging: Print the release notes
           echo "Release notes for version $VERSION:"
