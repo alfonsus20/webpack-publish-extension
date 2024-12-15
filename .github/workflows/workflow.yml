@@ -103,23 +103,31 @@ jobs:
           # Debugging: Print the detected version
           echo "Creating release notes for version: $VERSION"
       
-          # Extract the changelog for the current version
-          CHANGELOG_SECTION=$(sed -n "/^## \\[$VERSION\\]/,/^## \\[/p" CHANGELOG.md | sed '$d')
+          # Get the last release tag
+          LAST_RELEASE=$(git describe --tags --abbrev=0 HEAD^)
+          
+          # Debugging: Print the last release
+          echo "Last release: $LAST_RELEASE"
       
-          # Debugging: Print the extracted changelog to check its content
-          echo "Extracted changelog:"
-          echo "$CHANGELOG_SECTION"
+          # Extract commits between the last release and current HEAD
+          COMMITS=$(git log "$LAST_RELEASE"..HEAD --pretty=format:"- %s (%an)")
       
-          # Handle the case where no changelog section is found
-          if [ -z "$CHANGELOG_SECTION" ]; then
-            echo "No changes found for version $VERSION" > current-release-notes.md
-            echo "Warning: No changelog section found for version $VERSION"
+          # Debugging: Print the extracted commits
+          echo "Commits since last release:"
+          echo "$COMMITS"
+      
+          # If no commits are found, use a fallback message
+          if [ -z "$COMMITS" ]; then
+            echo "No commits found since the last release ($LAST_RELEASE)" > current-release-notes.md
+            echo "Warning: No commits found."
           else
-            # Trim empty lines from the changelog section
-            echo "$CHANGELOG_SECTION" | sed '/^$/d' > current-release-notes.md
+            # Create release notes from the commits
+            echo "## Changes in $VERSION" > current-release-notes.md
+            echo "$COMMITS" >> current-release-notes.md
           fi
       
-          # Create the GitHub release with the extracted or fallback changelog
+          # Create the GitHub release
           gh release create "v$VERSION" --title "Release $VERSION" --notes-file current-release-notes.md
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      
