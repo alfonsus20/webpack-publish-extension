@@ -104,6 +104,6 @@ jobs:
           echo "$CHANGELOG_SECTION" > current-release-notes.md
 
           # Create the GitHub release
-          gh release create "v$VERSION" --title "Release $VERSION" --notes-file current-release-notes.md
+          gh release create "v$VERSION" --title "v$VERSION" --notes-file current-release-notes.md
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
