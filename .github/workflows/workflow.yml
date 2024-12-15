@@ -109,15 +109,28 @@ jobs:
           # Extract the current version from manifest.json
           VERSION=$(node -pe "require('./public/manifest.json').version")
 
-          # Extract the changelog for the current version
-          RELEASE_NOTES=$(npx auto-changelog --stdout --latest)
+          # Generate the changelog in JSON format with --unreleased-only
+          npx auto-changelog --unreleased-only --output changes.json --template json
+
+          # Read the changelog JSON
+          CHANGELOG=$(cat changes.json)
+
+          # Extract the release notes from the JSON output
+          RELEASE_NOTES=$(echo "$CHANGELOG" | jq -r '.[0].commits | map(" - " + .subject + " (" + .author + ")\n   " + .date + "\n   " + .href) | join("\n")')
 
           # Debugging: Print the release notes
           echo "Release notes for version $VERSION:"
           echo "$RELEASE_NOTES"
 
+          # If no release notes are found, use a fallback message
+          if [ -z "$RELEASE_NOTES" ]; then
+            echo "No commits found since the last release." > current-release-notes.md
+            echo "Warning: No commits found."
+          else
+            echo "## Changes in $VERSION\n\n$RELEASE_NOTES" > current-release-notes.md
+          fi
+
           # Create the GitHub release
-          echo "$RELEASE_NOTES" > current-release-notes.md
           gh release create "v$VERSION" --title "Release $VERSION" --notes-file current-release-notes.md
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

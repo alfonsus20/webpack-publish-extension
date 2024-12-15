@@ -1,0 +1,35 @@
+[
+  {
+    "isoDate": "2024-12-15",
+    "niceDate": "15 December 2024",
+    "diff": "v1.1.39..",
+    "href": "https://github.com/alfonsus20/webpack-publish-extension/compare/v1.1.39...HEAD",
+    "major": false,
+    "minor": false,
+    "tag": null,
+    "title": "Unreleased",
+    "date": "2024-12-15T15:02:55.996Z",
+    "summary": null,
+    "commits": [
+      {
+        "hash": "82ddb33a7a071ed13acc3ccf0229d6502cfbba9a",
+        "shorthash": "82ddb33",
+        "author": "Alfonsus Avianto Chandrawan",
+        "email": "alfonsus.chandrawan@traveloka.com",
+        "date": "2024-12-15T14:44:06.000Z",
+        "niceDate": "15 December 2024",
+        "subject": "remove double tagging",
+        "message": "remove double tagging",
+        "fixes": null,
+        "href": "https://github.com/alfonsus20/webpack-publish-extension/commit/82ddb33a7a071ed13acc3ccf0229d6502cfbba9a",
+        "breaking": false,
+        "files": 1,
+        "insertions": 0,
+        "deletions": 4,
+        "merge": null
+      }
+    ],
+    "merges": [],
+    "fixes": []
+  }
+]
