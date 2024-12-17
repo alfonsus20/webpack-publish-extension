@@ -101,11 +101,11 @@ jobs:
           echo "Detected version: $VERSION"
 
           # Generate or update the changelog
-          npx auto-changelog
+          npx auto-changelog --ignore-commit-pattern "chore: update CHANGELOG for version"
 
           # Stage and commit the changelog
           git add CHANGELOG.md
-          git commit -m "chore: update CHANGELOG for version $VERSION"
+          git commit -m "chore: update CHANGELOG for version $VERSION" 
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
