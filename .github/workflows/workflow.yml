@@ -83,38 +83,53 @@ jobs:
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
 
-      - name: Semantic Release 
+      - name: Create Git Tag
         run: |
-          npx semantic-release
+          VERSION=$(node -pe "require('./public/manifest.json').version")
+          git tag -a "v$VERSION" -m "Release version $VERSION"
+          git push origin "v$VERSION"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      # - name: Create Git Tag
-      #   run: |
-      #     VERSION=$(node -pe "require('./public/manifest.json').version")
-      #     git tag -a "v$VERSION" -m "Release version $VERSION"
-      #     git push origin "v$VERSION"
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Generate Changelog
+        run: |
+          # Extract the current version from manifest.json
+          VERSION=$(node -pe "require('./public/manifest.json').version")
 
-      # - name: Generate Changelog
-      #   run: |
-      #     # Extract the current version from manifest.json
-      #     VERSION=$(node -pe "require('./public/manifest.json').version")
+          # Debugging: Print the detected version
+          echo "Detected version: $VERSION"
 
-      #     # Debugging: Print the detected version
-      #     echo "Detected version: $VERSION"
+          # Generate or update the changelog
+          npx auto-changelog
 
-      #     # Generate or update the changelog
-      #     npx auto-changelog
+          # Stage and commit the changelog
+          git add CHANGELOG.md
+          git commit -m "chore: update CHANGELOG for version $VERSION"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      #     # Stage and commit the changelog
-      #     git add CHANGELOG.md
-      #     git commit -m "chore: update CHANGELOG for version $VERSION"
-      #     git push
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Get the current tag
+        id: get-tag
+        run: |
+          TAG=$(git describe --tags --exact-match HEAD)
+          if [ -z "$TAG" ]; then
+            echo "No tag found on HEAD. Exiting..."
+            exit 1
+          fi
+          echo "CURRENT_TAG=$TAG" >> $GITHUB_ENV
 
+      - name: Push changes to the current tag
+        run: |
+          # Remove the tag locally
+          git tag -d $CURRENT_TAG
+          # Recreate the tag
+          git tag $CURRENT_TAG
+          # Push the updated tag
+          git push origin $CURRENT_TAG --force
+        env:
+          CURRENT_TAG: ${{ env.CURRENT_TAG }}
+          
       # - name: Create GitHub Release
       #   run: |
       #     # Extract the current version from manifest.json
