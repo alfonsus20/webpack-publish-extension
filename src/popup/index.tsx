@@ -20,7 +20,7 @@ const Popup: React.FC = () => {
 
     form.reset();
 
-    showNotification({ title: "Success", message: `Added: ${newActivity}` });
+    showNotification({ title: "Success Test", message: `Added: ${newActivity}` });
   };
 
   return (
