@@ -83,61 +83,67 @@ jobs:
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
 
-      - name: Generate Changelog
+      - name: Semantic Release 
         run: |
-          # Extract the current version from manifest.json
-          VERSION=$(node -pe "require('./public/manifest.json').version")
-
-          # Debugging: Print the detected version
-          echo "Detected version: $VERSION"
-
-          # Generate or update the changelog
-          npx auto-changelog
-
-          # Stage and commit the changelog
-          git add CHANGELOG.md
-          git commit -m "chore: update CHANGELOG for version $VERSION"
-          git push
+          npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      - name: Create Git Tag
-        run: |
-          VERSION=$(node -pe "require('./public/manifest.json').version")
-          git tag -a "v$VERSION" -m "Release version $VERSION"
-          git push origin "v$VERSION"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          
-      - name: Create GitHub Release
-        run: |
-          # Extract the current version from manifest.json
-          VERSION=$(node -pe "require('./public/manifest.json').version")
+      # - name: Create Git Tag
+      #   run: |
+      #     VERSION=$(node -pe "require('./public/manifest.json').version")
+      #     git tag -a "v$VERSION" -m "Release version $VERSION"
+      #     git push origin "v$VERSION"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-          # Generate the changelog in JSON format with --unreleased-only
-          npx auto-changelog --unreleased-only --output changes.json --template json --compare-url
+      # - name: Generate Changelog
+      #   run: |
+      #     # Extract the current version from manifest.json
+      #     VERSION=$(node -pe "require('./public/manifest.json').version")
 
-          cat changes.json
+      #     # Debugging: Print the detected version
+      #     echo "Detected version: $VERSION"
 
-          # Read the changelog JSON
-          CHANGELOG=$(cat changes.json)
+      #     # Generate or update the changelog
+      #     npx auto-changelog
 
-          # Extract all commits from the JSON output
-          RELEASE_NOTES=$(echo "$CHANGELOG" | jq -r '[.[] | .commits[] | ("- " + .subject + " (" + .author + ")") + "\n   " + .href] | join("\n\n")')
+      #     # Stage and commit the changelog
+      #     git add CHANGELOG.md
+      #     git commit -m "chore: update CHANGELOG for version $VERSION"
+      #     git push
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-          # Debugging: Print the release notes
-          echo "Release notes for version $VERSION:"
-          echo "$RELEASE_NOTES"
+      # - name: Create GitHub Release
+      #   run: |
+      #     # Extract the current version from manifest.json
+      #     VERSION=$(node -pe "require('./public/manifest.json').version")
 
-          # If no release notes are found, use a fallback message
-          if [ -z "$RELEASE_NOTES" ]; then
-            echo "No commits found since the last release." > current-release-notes.md
-            echo "Warning: No commits found."
-          else
-            echo $RELEASE_NOTES > current-release-notes.md
-          fi
+      #     # Generate the changelog in JSON format with --unreleased-only
+      #     npx auto-changelog --unreleased-only --output changes.json --template json --compare-url
 
-          # Create the GitHub release
-          gh release create "v$VERSION" --title "Release $VERSION" --notes-file current-release-notes.md
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      #     cat changes.json
+
+      #     # Read the changelog JSON
+      #     CHANGELOG=$(cat changes.json)
+
+      #     # Extract all commits from the JSON output
+      #     RELEASE_NOTES=$(echo "$CHANGELOG" | jq -r '[.[] | .commits[] | ("- " + .subject + " (" + .author + ")") + "\n   " + .href] | join("\n\n")')
+
+      #     # Debugging: Print the release notes
+      #     echo "Release notes for version $VERSION:"
+      #     echo "$RELEASE_NOTES"
+
+      #     # If no release notes are found, use a fallback message
+      #     if [ -z "$RELEASE_NOTES" ]; then
+      #       echo "No commits found since the last release." > current-release-notes.md
+      #       echo "Warning: No commits found."
+      #     else
+      #       echo $RELEASE_NOTES > current-release-notes.md
+      #     fi
+
+      #     # Create the GitHub release
+      #     gh release create "v$VERSION" --title "Release $VERSION" --notes-file current-release-notes.md
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
