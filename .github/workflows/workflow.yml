@@ -110,17 +110,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      - name: Push changes to the current tag
-        run: |
-          # Remove the tag locally
-          git tag -d $CURRENT_TAG
-          # Recreate the tag
-          git tag $CURRENT_TAG
-          # Push the updated tag
-          git push origin $CURRENT_TAG --force
-        env:
-          CURRENT_TAG: ${{ env.CURRENT_TAG }}
-
       # - name: Create GitHub Release
       #   run: |
       #     # Extract the current version from manifest.json
