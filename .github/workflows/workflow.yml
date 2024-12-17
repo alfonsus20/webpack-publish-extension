@@ -88,6 +88,7 @@ jobs:
           VERSION=$(node -pe "require('./public/manifest.json').version")
           git tag -a "v$VERSION" -m "Release version $VERSION"
           git push origin "v$VERSION"
+          echo "CURRENT_TAG=$(v$VERSION)" >> $GITHUB_ENV
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
@@ -109,16 +110,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      - name: Get the current tag
-        id: get-tag
-        run: |
-          TAG=$(git describe --tags --exact-match HEAD)
-          if [ -z "$TAG" ]; then
-            echo "No tag found on HEAD. Exiting..."
-            exit 1
-          fi
-          echo "CURRENT_TAG=$TAG" >> $GITHUB_ENV
-
       - name: Push changes to the current tag
         run: |
           # Remove the tag locally
@@ -129,7 +120,7 @@ jobs:
           git push origin $CURRENT_TAG --force
         env:
           CURRENT_TAG: ${{ env.CURRENT_TAG }}
-          
+
       # - name: Create GitHub Release
       #   run: |
       #     # Extract the current version from manifest.json
