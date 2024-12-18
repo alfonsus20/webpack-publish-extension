@@ -110,35 +110,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      # - name: Create GitHub Release
-      #   run: |
-      #     # Extract the current version from manifest.json
-      #     VERSION=$(node -pe "require('./public/manifest.json').version")
+      - name: Create GitHub Release
+        run: |
+          # Extract the current version from manifest.json
+          VERSION=$(node -pe "require('./public/manifest.json').version")
 
-      #     # Generate the changelog in JSON format with --unreleased-only
-      #     npx auto-changelog --unreleased-only --output changes.json --template json --compare-url
+          # Generate the changelog in JSON format with --unreleased-only
+          npx auto-changelog --template changelog-template.hbs --output current-release-notes.md --starting-version=v$(VERSION) --ignore-commit-pattern "chore: update CHANGELOG for version"
 
-      #     cat changes.json
-
-      #     # Read the changelog JSON
-      #     CHANGELOG=$(cat changes.json)
-
-      #     # Extract all commits from the JSON output
-      #     RELEASE_NOTES=$(echo "$CHANGELOG" | jq -r '[.[] | .commits[] | ("- " + .subject + " (" + .author + ")") + "\n   " + .href] | join("\n\n")')
-
-      #     # Debugging: Print the release notes
-      #     echo "Release notes for version $VERSION:"
-      #     echo "$RELEASE_NOTES"
-
-      #     # If no release notes are found, use a fallback message
-      #     if [ -z "$RELEASE_NOTES" ]; then
-      #       echo "No commits found since the last release." > current-release-notes.md
-      #       echo "Warning: No commits found."
-      #     else
-      #       echo $RELEASE_NOTES > current-release-notes.md
-      #     fi
-
-      #     # Create the GitHub release
-      #     gh release create "v$VERSION" --title "Release $VERSION" --notes-file current-release-notes.md
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          # Create the GitHub release
+          gh release create "v$VERSION" --title "Release $VERSION" --notes-file current-release-notes.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
