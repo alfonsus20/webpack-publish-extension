@@ -116,7 +116,7 @@ jobs:
           VERSION=$(node -pe "require('./public/manifest.json').version")
 
           # Generate the changelog in JSON format with --unreleased-only
-          npx auto-changelog --template changelog-template.hbs --output current-release-notes.md --starting-version=v$(VERSION) --ignore-commit-pattern "chore: update CHANGELOG for version"
+          npx auto-changelog --template changelog-template.hbs --output current-release-notes.md --starting-version="v$VERSION" --ignore-commit-pattern "chore: update CHANGELOG for version"
 
           # Create the GitHub release
           gh release create "v$VERSION" --title "Release $VERSION" --notes-file current-release-notes.md
