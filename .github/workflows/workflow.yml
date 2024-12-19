@@ -51,21 +51,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Store Old Version
-        run: |
-          VERSION=$(node -pe "require('./public/manifest.json').version")
-          echo "OLD_VERSION=$(VERSION)" >> $GITHUB_ENV
-
       - name: Bump Version in manifest.json
         run: node scripts/bumpManifestVersion.js ${{ github.event.inputs.bump-type }}
-
-      - name: Commit and Push Changes
-        run: |
-          git add public/manifest.json
-          git commit -m "chore: bump version in manifest.json to ${{ github.event.inputs.bump-type }}"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Build extension
         run: yarn build
@@ -82,6 +69,14 @@ jobs:
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
+
+      - name: Commit Version Bump and Push Changes
+        run: |
+          git add public/manifest.json
+          git commit -m "chore: bump version in manifest.json to ${{ github.event.inputs.bump-type }}"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Create Git Tag
         run: |
