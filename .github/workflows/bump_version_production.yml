@@ -74,10 +74,10 @@ jobs:
 
       - name: Generate Changelog
         run: |
-          npx auto-changelog --ignore-commit-pattern "chore: update CHANGELOG for version" --output changelog/CHANGELOG_PRODUCTION.md
+          npx auto-changelog --ignore-commit-pattern "chore: update CHANGELOG for version" --output changelog/CHANGELOG.md
 
       - name: Add Changelog
-        run: git add changelog/CHANGELOG_PRODUCTION.md
+        run: git add changelog/CHANGELOG.md
 
       - name: Commit Changelog
         uses: qoomon/actions--create-commit@v1.2.1
