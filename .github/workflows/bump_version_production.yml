@@ -56,7 +56,7 @@ jobs:
           skip-empty: true
 
       - name: Push changes
-        run: git push origin master
+        run: git push origin main
 
       - name: Create Git Tag
         run: |
@@ -81,7 +81,7 @@ jobs:
           skip-empty: true
 
       - name: Push Changes for Changelog
-        run: git push origin master
+        run: git push origin main
 
       - name: Create GitHub Release
         run: |
