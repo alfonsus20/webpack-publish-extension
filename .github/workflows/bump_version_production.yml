@@ -37,13 +37,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Bump Version in manifest-prod.json
         run: node scripts/bumpManifestVersion.js ${{ github.event.inputs.bump-type }} production
 
       - name: Build extension
-        run: npm run build
+        run: yarn build
 
       - name: Add Version Bump Changes
         run: git add public/manifest-prod.json

@@ -3,7 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 const bumpType = process.argv[2]; // 'major', 'minor', or 'patch'
-const manifestPath = path.resolve(__dirname, '../public/manifest.json');
+const environment = process.argv[3]; // 'staging' or 'production'
+const manifestPath = path.resolve(__dirname, environment === 'staging' ? '../public/manifest-stg.json' : '../public/manifest-prod.json');
 
 if (!bumpType || !['major', 'minor', 'patch'].includes(bumpType)) {
   console.error("Error: Please provide a valid bump type ('major', 'minor', 'patch').");
