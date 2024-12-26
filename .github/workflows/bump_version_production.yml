@@ -1,12 +1,12 @@
-name: 'Bump Version Extension Production'
+name: "Bump Version Extension Production"
 
 on:
   workflow_dispatch:
     inputs:
       bump-type:
-        description: 'Version bump type (major, minor, patch)'
+        description: "Version bump type (major, minor, patch)"
         required: true
-        default: 'patch'
+        default: "patch"
         type: choice
         options:
           - patch
@@ -39,32 +39,38 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Bump Version in manifest-prod.json
+      - name: Bump Version in manifest-stg.json
         run: node scripts/bumpManifestVersion.js ${{ github.event.inputs.bump-type }} production
 
       - name: Build extension
         run: yarn build
 
       - name: Add Version Bump Changes
-        run: git add public/manifest-prod.json
+        run: git add public/manifest-stg.json
 
       - name: Add and Commit Version Bump
         uses: qoomon/actions--create-commit@v1.2.1
         id: commit-version-bump
         with:
-          message: 'chore: bump version in manifest-prod.json to ${{ github.event.inputs.bump-type }}'
+          message: "chore: bump version in manifest-stg.json to ${{ github.event.inputs.bump-type }}"
           skip-empty: true
 
       - name: Push changes
         run: git push origin main
 
-      - name: Create Git Tag
+      - name: Store Current Tag
         run: |
-          VERSION=$(node -pe "require('./public/manifest-prod.json').version")
+          VERSION=$(node -pe "require('./public/manifest-stg.json').version")
           TAG="v${VERSION}"
-          git tag -a "$TAG" -m "Release version $TAG"
-          git push origin "$TAG"
           echo "CURRENT_TAG=$TAG" >> $GITHUB_ENV
+
+      - name: Create Git Tag
+        uses: qoomon/actions--create-tag@v1
+        with:
+          name: ${{ env.CURRENT_TAG }}
+
+      - name: Push changes
+        run: git push origin ${{ env.CURRENT_TAG }}
 
       - name: Generate Changelog
         run: |
@@ -77,7 +83,7 @@ jobs:
         uses: qoomon/actions--create-commit@v1.2.1
         id: commit-changelog
         with:
-          message: 'chore: update changelog for ${{ env.CURRENT_TAG }}'
+          message: "chore: update changelog for ${{ env.CURRENT_TAG }}"
           skip-empty: true
 
       - name: Push Changes for Changelog
@@ -87,3 +93,5 @@ jobs:
         run: |
           npx auto-changelog --template changelog/templates/changelog-production-template.hbs --output current-release-notes.md --starting-version="${{ env.CURRENT_TAG }}" --ignore-commit-pattern "chore: update CHANGELOG for version ${{ env.CURRENT_TAG }}"
           gh release create "${{ env.CURRENT_TAG }}" --title "Release ${{ env.CURRENT_TAG }}" --notes-file current-release-notes.md
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
