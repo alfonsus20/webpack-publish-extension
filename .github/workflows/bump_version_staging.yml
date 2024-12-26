@@ -1,0 +1,87 @@
+name: 'Bump Version Extension Staging'
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump-type:
+        description: 'Version bump type (major, minor, patch)'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  build-extension:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Fetch all tags
+        run: git fetch --tags
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Bump Version in manifest-stg.json
+        run: node scripts/bumpManifestVersion.js ${{ github.event.inputs.bump-type }} staging
+
+      - name: Build extension
+        run: npm run build
+
+      - name: Add Version Bump Changes
+        run: git add public/manifest-stg.json
+
+      - name: Add and Commit Version Bump
+        uses: qoomon/actions--create-commit@v1.2.1
+        id: commit-version-bump
+        with:
+          message: 'chore: bump version in manifest-stg.json to ${{ github.event.inputs.bump-type }}'
+          skip-empty: true
+
+      - name: Push changes
+        run: git push origin master
+
+      - name: Create Git Tag
+        run: |
+          VERSION=$(node -pe "require('./public/manifest-stg.json').version")
+          TAG="v${VERSION}-beta"
+          git tag -a "$TAG" -m "Release version $TAG"
+          git push origin "$TAG"
+          echo "CURRENT_TAG=$TAG" >> $GITHUB_ENV
+
+      - name: Generate Changelog
+        run: |
+          npx auto-changelog --ignore-commit-pattern "chore: update CHANGELOG for version" --output CHANGELOG_STAGING.md
+
+      - name: Add Changelog
+        run: git add CHANGELOG.md
+
+      - name: Commit Changelog
+        uses: qoomon/actions--create-commit@v1.2.1
+        id: commit-changelog
+        with:
+          message: 'chore: update changelog for ${{ env.CURRENT_TAG }}'
+          skip-empty: true
+
+      - name: Push Changes for Changelog
+        run: git push origin master
+
+      - name: Create GitHub Release
+        run: |
+          npx auto-changelog --template changelog/templates/changelog-staging-template.hbs --output current-release-notes.md --starting-version="${{ env.CURRENT_TAG }}" --ignore-commit-pattern "chore: update CHANGELOG for version ${{ env.CURRENT_TAG }}"
+          gh release create "${{ env.CURRENT_TAG }}" --title "Release ${{ env.CURRENT_TAG }}" --notes-file current-release-notes.md
