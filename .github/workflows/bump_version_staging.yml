@@ -93,3 +93,5 @@ jobs:
         run: |
           npx auto-changelog --template changelog/templates/changelog-staging-template.hbs --output current-release-notes.md --starting-version="${{ env.CURRENT_TAG }}" --ignore-commit-pattern "chore: update CHANGELOG for version ${{ env.CURRENT_TAG }}"
           gh release create "${{ env.CURRENT_TAG }}" --title "Release ${{ env.CURRENT_TAG }}" --notes-file current-release-notes.md
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
