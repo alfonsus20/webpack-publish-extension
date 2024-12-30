@@ -16,10 +16,24 @@
 - chore: bump version in manifest-prod.json to patch [`67cc0b9`](https://github.com/alfonsus20/webpack-publish-extension/commit/67cc0b9cb6ae3ec518c3ad26dcfc1340b8c0460d)
 - adjust changelog [`39d84c2`](https://github.com/alfonsus20/webpack-publish-extension/commit/39d84c2033322bfe114e7d0168f257e49cc3d479)
 
-## [v1.1.64-beta](https://github.com/alfonsus20/webpack-publish-extension/compare/v1.1.63-beta...v1.1.64-beta) (2024-12-26)
+## [v1.1.64-beta](https://github.com/alfonsus20/webpack-publish-extension/compare/v1.1.63...v1.1.64-beta) (2024-12-26)
 
+## [v1.1.63](https://github.com/alfonsus20/webpack-publish-extension/compare/v1.1.63-beta...v1.1.63) (2024-12-30)
+
+- chore: update changelog for v1.1.64-beta [`9305988`](https://github.com/alfonsus20/webpack-publish-extension/commit/93059886812509b07cb19d104658121c4d233064)
+- chore: update changelog for v1.1.62 [`583f3c3`](https://github.com/alfonsus20/webpack-publish-extension/commit/583f3c3f99bc319c98cf91b86536836cb7cfb999)
+- chore: update changelog for v1.2.0-beta [`66648f1`](https://github.com/alfonsus20/webpack-publish-extension/commit/66648f11d06b66b5efb321deb4805cfdfd0ed34b)
+- chore: update changelog for v1.1.65-beta [`1631392`](https://github.com/alfonsus20/webpack-publish-extension/commit/16313920202c46f9b49472e47b27db2a21318403)
+- fix CI [`4010723`](https://github.com/alfonsus20/webpack-publish-extension/commit/401072326bae87d72d8b1a51d45745cf79746496)
+- adjust changelog [`df5153e`](https://github.com/alfonsus20/webpack-publish-extension/commit/df5153e68429b41ce6328bc1ebb92d59d52b72d0)
 - fix file name [`668a8ad`](https://github.com/alfonsus20/webpack-publish-extension/commit/668a8ad936c6c9bd102f973c59373815184586e0)
+- chore: bump version in manifest-prod.json to patch [`6c4c3d9`](https://github.com/alfonsus20/webpack-publish-extension/commit/6c4c3d95d3e3118c8d04bc865a575d1d60455909)
+- chore: bump version in manifest-stg.json to minor [`3545d5e`](https://github.com/alfonsus20/webpack-publish-extension/commit/3545d5eace3a8d091bedc826967a43d009a4f836)
+- chore: bump version in manifest-stg.json to patch [`6308ed6`](https://github.com/alfonsus20/webpack-publish-extension/commit/6308ed669cc307ae0b5717a109e7380fa56a7e99)
+- chore: bump version in manifest-prod.json to patch [`f91fdb0`](https://github.com/alfonsus20/webpack-publish-extension/commit/f91fdb0c25cf1363c142e802399e5860322ab77a)
+- chore: bump version in manifest-prod.json to patch [`67cc0b9`](https://github.com/alfonsus20/webpack-publish-extension/commit/67cc0b9cb6ae3ec518c3ad26dcfc1340b8c0460d)
 - chore: bump version in manifest-stg.json to patch [`a2ceadf`](https://github.com/alfonsus20/webpack-publish-extension/commit/a2ceadfce113cf9d590112b833b9b53c5a5af4ac)
+- adjust changelog [`39d84c2`](https://github.com/alfonsus20/webpack-publish-extension/commit/39d84c2033322bfe114e7d0168f257e49cc3d479)
 
 ## [v1.1.63-beta](https://github.com/alfonsus20/webpack-publish-extension/compare/v1.1.62...v1.1.63-beta) (2024-12-26)
 
