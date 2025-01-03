@@ -77,7 +77,7 @@ jobs:
           npx auto-changelog --tag-pattern "v.*-staging" --template changelog/templates/changelog-production-template.hbs --ignore-commit-pattern "chore: update CHANGELOG for version" --output changelog/CHANGELOG_STAGING.md
 
       - name: Add Changelog
-        run: git add changelog/CHANGELOG.md
+        run: git add changelog/CHANGELOG_STAGING.md
 
       - name: Commit Changelog
         uses: qoomon/actions--create-commit@v1.2.1
