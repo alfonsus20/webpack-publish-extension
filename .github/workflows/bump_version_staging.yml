@@ -74,7 +74,7 @@ jobs:
 
       - name: Generate Changelog
         run: |
-          npx auto-changelog --starting-version="v1.2.2-staging" --tag-pattern "v.*-staging" --template changelog/templates/changelog-production-template.hbs --ignore-commit-pattern "chore: update changelog" --output changelog/CHANGELOG_STAGING.md --hide-credit
+          npx auto-changelog --tag-pattern "v.*-staging" --template changelog/templates/changelog-production-template.hbs --ignore-commit-pattern "chore: update changelog" --output changelog/CHANGELOG_STAGING.md --hide-credit
 
       - name: Add Changelog
         run: git add changelog/CHANGELOG_STAGING.md
