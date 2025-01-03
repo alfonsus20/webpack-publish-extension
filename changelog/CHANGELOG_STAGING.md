@@ -1,4 +1,8 @@
 # Production Changelog
+## [v1.2.5-staging] - 2025-01-03
+- chore: update changelog for v1.2.4-staging (7555436f5718564560b9c479a8735bcaf667a990)
+- chore: bump version in manifest-stg.json to patch (aa3714043a7fb4f822ecf2208fe0c9a719ef2388)
+- add starting date (1fe453c04e1ed02f7326d0f7564f49537c05fe19)
 ## [v1.2.4-staging] - 2025-01-03
 - chore: bump version in manifest-stg.json to patch (606b7a26434f8e9497904cb7e4906001af1f09d5)
 - fix file name (9b2e9c73df03408c06b927fc31cc5353cb1f4665)
