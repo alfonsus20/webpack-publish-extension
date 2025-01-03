@@ -91,7 +91,7 @@ jobs:
 
       - name: Create GitHub Release
         run: |
-          npx auto-changelog --tag-pattern ^v\d+\.\d+\.\d+-beta$ --output current-release-notes.md --starting-version="${{ env.CURRENT_TAG }}" --ignore-commit-pattern "chore: update CHANGELOG for version ${{ env.CURRENT_TAG }}"
+          npx auto-changelog --tag-pattern --output current-release-notes.md --starting-version="${{ env.CURRENT_TAG }}" --ignore-commit-pattern "chore: update CHANGELOG for version ${{ env.CURRENT_TAG }}"
           gh release create "${{ env.CURRENT_TAG }}" --title "Release ${{ env.CURRENT_TAG }}" --notes-file current-release-notes.md
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
