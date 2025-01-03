@@ -61,7 +61,7 @@ jobs:
       - name: Store Current Tag
         run: |
           VERSION=$(node -pe "require('./public/manifest-stg.json').version")
-          TAG="v${VERSION}-beta"
+          TAG="v${VERSION}-staging"
           echo "CURRENT_TAG=$TAG" >> $GITHUB_ENV
 
       - name: Create Git Tag
@@ -74,7 +74,7 @@ jobs:
 
       - name: Generate Changelog
         run: |
-          npx auto-changelog --tag-pattern ^v\d+\.\d+\.\d+-beta$ --template changelog/templates/changelog-production-template.hbs --ignore-commit-pattern "chore: update CHANGELOG for version" --output changelog/CHANGELOG.md
+          npx auto-changelog --tag-pattern ^v\d+\.\d+\.\d+-staging$ --template changelog/templates/changelog-production-template.hbs --ignore-commit-pattern "chore: update CHANGELOG for version" --output changelog/CHANGELOG_STAGING.md
 
       - name: Add Changelog
         run: git add changelog/CHANGELOG.md
