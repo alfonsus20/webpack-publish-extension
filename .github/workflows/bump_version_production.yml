@@ -74,7 +74,7 @@ jobs:
 
       - name: Generate Changelog
         run: |
-          npx auto-changelog --tag-pattern ^v\d+\.\d+\.\d+-production$ --template changelog/templates/changelog-production-template.hbs --ignore-commit-pattern "chore: update CHANGELOG for version" --output changelog/CHANGELOG_PRODUCTION.md
+          npx auto-changelog --tag-pattern "v.*-production" --template changelog/templates/changelog-production-template.hbs --ignore-commit-pattern "chore: update changelog" --output changelog/CHANGELOG_PRODUCTION.md --hide-credit
 
       - name: Add Changelog
         run: git add changelog/CHANGELOG.md
@@ -91,7 +91,7 @@ jobs:
 
       - name: Create GitHub Release
         run: |
-          npx auto-changelog --tag-pattern ^v\d+\.\d+\.\d+$ --output current-release-notes.md --starting-version="${{ env.CURRENT_TAG }}" --ignore-commit-pattern "chore: update CHANGELOG for version ${{ env.CURRENT_TAG }}"
+          npx auto-changelog --tag-pattern "v.*-production" --starting-version="vX.X.X-production" --output current-release-notes.md --starting-version="${{ env.CURRENT_TAG }}" --ignore-commit-pattern "chore: update changelog" --hide-credit
           gh release create "${{ env.CURRENT_TAG }}" --title "Release ${{ env.CURRENT_TAG }}" --notes-file current-release-notes.md
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
