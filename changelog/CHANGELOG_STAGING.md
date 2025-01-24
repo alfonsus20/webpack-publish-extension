@@ -1,4 +1,7 @@
 # Production Changelog
+## [v1.2.7-staging] - 2025-01-24
+- chore: bump version in manifest-stg.json to patch (51f6666522393926fc6ee4e67abe037905b57457)
+- remove starting version (bd2520fd4ad64555ef3af4e2533e2aafa7ce26b5)
 ## [v1.2.6-staging] - 2025-01-03
 - add hide credit (4ca2cad82af6ac22ef285e91163299828413f4c3)
 - chore: bump version in manifest-stg.json to patch (6773c8792ebd535252ddb1679190d7ec46b6878a)
