@@ -77,7 +77,7 @@ jobs:
           npx auto-changelog --tag-pattern "v.*-production" --template changelog/templates/changelog-production-template.hbs --ignore-commit-pattern "chore: update changelog" --output changelog/CHANGELOG_PRODUCTION.md --hide-credit
 
       - name: Add Changelog
-        run: git add changelog/CHANGELOG.md
+        run: git add changelog/CHANGELOG_PRODUCTION.md
 
       - name: Commit Changelog
         uses: qoomon/actions--create-commit@v1.2.1
