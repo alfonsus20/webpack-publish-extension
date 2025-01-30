@@ -28,6 +28,9 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GH_TOKEN }}
 
+      - name: Set Repository URL
+        run: echo "REPO_URL=${{ github.server_url }}/${{ github.repository }}" >> $GITHUB_ENV
+
       - name: Fetch all tags
         run: git fetch --tags
 
