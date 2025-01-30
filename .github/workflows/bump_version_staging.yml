@@ -27,7 +27,7 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GH_TOKEN }}
-          
+
       - name: Fetch all tags
         run: git fetch --tags
 
@@ -74,7 +74,7 @@ jobs:
 
       - name: Generate Changelog
         run: |
-          npx auto-changelog --tag-pattern "v.*-staging" --template changelog/templates/changelog-staging-template.hbs --ignore-commit-pattern "chore: update changelog" --output changelog/CHANGELOG_STAGING.md --hide-credit --starting-version="v1.2.9-staging"
+          npx auto-changelog --tag-pattern "v.*-staging" --template changelog/templates/changelog-staging-template.hbs --ignore-commit-pattern "chore: update changelog" --output changelog/CHANGELOG_STAGING.md --hide-credit --starting-version="v1.2.10-staging"
 
       - name: Add Changelog
         run: git add changelog/CHANGELOG_STAGING.md
