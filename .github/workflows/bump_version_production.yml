@@ -12,7 +12,14 @@ on:
           - patch
           - minor
           - major
-
+      publish:
+        description: "Publish the extension to the Chrome Web Store"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - true
+          - false
 jobs:
   release-extension:
     runs-on: ubuntu-latest
