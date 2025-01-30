@@ -1,5 +1,5 @@
 import { showNotification } from "@/lib/notification";
 
 chrome.runtime.onInstalled.addListener(() => {
-  showNotification({ title: 'Installed', message: 'Extension was Installed Successfully' });
+  showNotification({ title: 'Installed', message: 'Extension was Installed Successfully update' });
 });
