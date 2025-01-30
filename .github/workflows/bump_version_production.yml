@@ -14,7 +14,7 @@ on:
           - major
 
 jobs:
-  build-extension:
+  release-extension:
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -44,6 +44,19 @@ jobs:
 
       - name: Build extension
         run: yarn build
+
+      - name: Zip production extension
+        run: zip -r extension-production.zip dist
+
+      - name: Upload & release
+        if: ${{ github.event.inputs.publish == 'true' }}
+        uses: mnao305/chrome-extension-upload@v5.0.0
+        with:
+          file-path: extension-production.zip
+          extension-id: kaolbiekdhlpjinfpgacadmkhiahkhne
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
 
       - name: Add Version Bump Changes
         run: git add public/manifest-prod.json
