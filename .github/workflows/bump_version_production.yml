@@ -50,7 +50,7 @@ jobs:
         run: node scripts/bumpManifestVersion.js ${{ github.event.inputs.bump-type }} production
 
       - name: Build extension
-        run: yarn build
+        run: yarn build:prod
 
       - name: Zip production extension
         run: zip -r extension-production.zip dist

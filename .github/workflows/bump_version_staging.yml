@@ -50,7 +50,7 @@ jobs:
         run: node scripts/bumpManifestVersion.js ${{ github.event.inputs.bump-type }} staging
 
       - name: Build extension
-        run: yarn build
+        run: yarn build:stg
 
       - name: Zip staging extension
         run: zip -r extension-staging.zip dist
