@@ -1,21 +1,5 @@
 # Production Changelog
-## [v1.2.7-staging] - 2025-01-24
-- chore: bump version in manifest-stg.json to patch (51f6666522393926fc6ee4e67abe037905b57457)
-- remove starting version (bd2520fd4ad64555ef3af4e2533e2aafa7ce26b5)
-## [v1.2.6-staging] - 2025-01-03
-- add hide credit (4ca2cad82af6ac22ef285e91163299828413f4c3)
-- chore: bump version in manifest-stg.json to patch (6773c8792ebd535252ddb1679190d7ec46b6878a)
-- add starting version (5d1c7044ecb51e1b6c59671a84582198ca0e5886)
-## [v1.2.5-staging] - 2025-01-03
-- chore: bump version in manifest-stg.json to patch (aa3714043a7fb4f822ecf2208fe0c9a719ef2388)
-- add starting date (1fe453c04e1ed02f7326d0f7564f49537c05fe19)
-## [v1.2.4-staging] - 2025-01-03
-- chore: bump version in manifest-stg.json to patch (606b7a26434f8e9497904cb7e4906001af1f09d5)
-- fix file name (9b2e9c73df03408c06b927fc31cc5353cb1f4665)
-## [v1.2.3-staging] - 2025-01-03
-- fix bump version staging (6bef906ba06e4d5337c90152ba93249f6fc47f57)
-- chore: bump version in manifest-stg.json to patch (249653da9946d1b9dcf39a57084bb556df79708a)
-## [v1.2.2-staging] - 2025-01-03
+## [v1.2.8-staging] - 2025-01-30
 - renew git (c4ec23a044431a227fa254942d9dff0cc576594d)
 - remove changelog (b63000841a0716c14dfe1937de77844d0e715e95)
 - add changelog tempalte (e209cc7223508d7fe892efb82ef2e14e4ee2add3)
@@ -104,6 +88,9 @@
 - test (d02729eb9d78fcf9d5de9326cfdecc355a30b32a)
 - add fetch all tags (af332f95f5678da860094084fdcd38134eb64c5f)
 - adjust generate changelog (59286f9600ef58462b420e8894872b9537ce82d5)
+- update CI (f76ba465d5b2affbb0644415814251e26fa927d6)
+- add hide credit (4ca2cad82af6ac22ef285e91163299828413f4c3)
+- fix bump version staging (6bef906ba06e4d5337c90152ba93249f6fc47f57)
 - upgrade node (17e26f391c44e8b37baa9fcdb53a4ce37370f45c)
 - add enviroment (12db5f58a0c291ec186d278349c48014f126ddd6)
 - adjust github bot config (03d443473db855d559248bd19dcb6533a6216145)
@@ -115,6 +102,21 @@
 - add package.json (061511885b4166b8f60ac8216df42cf8f3837d5e)
 - test (d4d8070d8d1e0d9fac9807dfdf09ae7a454c9b37)
 - fix again (d772110bfabc5e88222a8f2e2e2e4949f8504241)
+- chore: bump version in manifest-stg.json to patch (16be6beaa59f9fa1eaa0dc977f65d5df74350524)
+- update log message (235f4b70c67333d5e698d8f5cc7f462bbc629c3d)
+- chore: bump version in manifest-prod.json to patch (bf1ebf50ec953eca8f099c4b6db91c6d649920f2)
+- fix CI (85b4b3d9bbc8c52782437405aebc211cd4b60296)
+- chore: bump version in manifest-prod.json to patch (980fcb17e96905a5a67597141ebce4126e8380bc)
+- chore: bump version in manifest-prod.json to patch (35dc43a752b3a0cb4c65e7c56ac51a8a66d4da53)
+- chore: bump version in manifest-stg.json to patch (51f6666522393926fc6ee4e67abe037905b57457)
+- remove starting version (bd2520fd4ad64555ef3af4e2533e2aafa7ce26b5)
+- chore: bump version in manifest-stg.json to patch (6773c8792ebd535252ddb1679190d7ec46b6878a)
+- add starting version (5d1c7044ecb51e1b6c59671a84582198ca0e5886)
+- chore: bump version in manifest-stg.json to patch (aa3714043a7fb4f822ecf2208fe0c9a719ef2388)
+- add starting date (1fe453c04e1ed02f7326d0f7564f49537c05fe19)
+- chore: bump version in manifest-stg.json to patch (606b7a26434f8e9497904cb7e4906001af1f09d5)
+- fix file name (9b2e9c73df03408c06b927fc31cc5353cb1f4665)
+- chore: bump version in manifest-stg.json to patch (249653da9946d1b9dcf39a57084bb556df79708a)
 - chore: bump version in manifest-stg.json to patch (b8d932cca33317f75dc2387519a39a3680cdd38d)
 - fix template file (9417384fbd2601bb8310564618e8383a0fb16920)
 - chore: bump version in manifest-stg.json to patch (099a0c583c843ff5821dc5c14ed273c3167006f3)
