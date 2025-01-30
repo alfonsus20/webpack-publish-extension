@@ -12,6 +12,14 @@ on:
           - patch
           - minor
           - major
+      upload:
+        description: "Upload the extension to the Chrome Web Store"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - true
+          - false
       publish:
         description: "Publish the extension to the Chrome Web Store"
         required: false
