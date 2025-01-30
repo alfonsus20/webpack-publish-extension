@@ -1,4 +1,7 @@
 # Staging Changelog
+## [v1.3.0-staging] - 2025-01-30
+- chore: bump version in manifest-stg.json to minor ([d5ec217140ca6bf45ddc9cc8a118f4ef893e07c5](https://github.com/alfonsus20/webpack-publish-extension/commit/d5ec217140ca6bf45ddc9cc8a118f4ef893e07c5))
+- remove enter ([ce07715db81d4595ab2c0d77097ca2770da2d439](https://github.com/alfonsus20/webpack-publish-extension/commit/ce07715db81d4595ab2c0d77097ca2770da2d439))
 ## [v1.2.14-staging] - 2025-01-30
 - add repo url ([5d889dc777d0ec11b1b5cd6dbeabfcd7854065de](https://github.com/alfonsus20/webpack-publish-extension/commit/5d889dc777d0ec11b1b5cd6dbeabfcd7854065de))
 - update ci ([3a7728e777be2814bc592214cd940124e26ffbe6](https://github.com/alfonsus20/webpack-publish-extension/commit/3a7728e777be2814bc592214cd940124e26ffbe6))
@@ -18,7 +21,6 @@
 ## [v1.2.10-staging] - 2025-01-30
 - 1.2.10 stg ([0938045a2efc9df8448688794be5aa222a97cf60](https://github.com/alfonsus20/webpack-publish-extension/commit/0938045a2efc9df8448688794be5aa222a97cf60))
 - 1.1.10 sth ([751c283ef00e8615893ed24fca11399da5914cbf](https://github.com/alfonsus20/webpack-publish-extension/commit/751c283ef00e8615893ed24fca11399da5914cbf))
-
 ## [v1.2.9-staging] - 2025-01-30
 - update change log manually (939970ebe62b221a3d63e7ab4d0d2820cde51f8d)
 - update (604f18643a0f66f055b5773b43b9bcc42cfa3610)
