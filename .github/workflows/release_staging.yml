@@ -1,4 +1,4 @@
-name: "Bump Version Extension Staging"
+name: "Release Extension Staging"
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: "Bump Version Extension Production"
+name: "Release Extension Production"
 
 on:
   workflow_dispatch:
