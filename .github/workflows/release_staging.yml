@@ -124,3 +124,9 @@ jobs:
           gh release create "${{ env.CURRENT_TAG }}" --title "Release ${{ env.CURRENT_TAG }}" --notes-file current-release-notes.md
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Upload extension as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pmt-extension_${{ env.CURRENT_TAG }}
+          path: extension-staging.zip
