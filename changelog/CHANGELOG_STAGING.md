@@ -1,4 +1,7 @@
 # Staging Changelog
+## [v1.3.6-staging] - 2025-02-07
+- fix zipping process ([2297b0790aa29408cf299415d6d9b53434d6dc72](https://github.com/alfonsus20/webpack-publish-extension/commit/2297b0790aa29408cf299415d6d9b53434d6dc72))
+- chore: bump version in manifest-stg.json to patch ([06058b8cc79034e768996247e510e8244eea026d](https://github.com/alfonsus20/webpack-publish-extension/commit/06058b8cc79034e768996247e510e8244eea026d))
 ## [v1.3.5-staging] - 2025-02-07
 - add branch checking ([245c8e5fa606f83f2ca1ea2d8cc1a1eaa0ccc356](https://github.com/alfonsus20/webpack-publish-extension/commit/245c8e5fa606f83f2ca1ea2d8cc1a1eaa0ccc356))
 - add unzip ([9fd8873935e1d22e2a60719b15149487661498d3](https://github.com/alfonsus20/webpack-publish-extension/commit/9fd8873935e1d22e2a60719b15149487661498d3))
