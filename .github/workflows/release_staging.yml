@@ -61,7 +61,7 @@ jobs:
         run: yarn build:stg
 
       - name: Zip staging extension
-        run: zip -r extension-staging.zip dist
+        run: cd dist && zip -r ../extension-staging.zip .
 
       - name: Upload & release
         if: ${{ github.event.inputs.upload == 'true' }}

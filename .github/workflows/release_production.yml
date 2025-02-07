@@ -62,7 +62,7 @@ jobs:
         run: yarn build:prod
 
       - name: Zip production extension
-        run: zip -r extension-production.zip dist
+        run: cd dist && zip -r ../extension-production.zip .
 
       - name: Upload & release
         if: ${{ github.event.inputs.upload == 'true' }}
