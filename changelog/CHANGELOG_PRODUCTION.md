@@ -1,4 +1,22 @@
 # Production Changelog
+## [v1.1.70-production] - 2025-02-07
+- update webpack ([400f25a88d20ddd3d07cece232bf6ab93a0837c8](https://github.com/alfonsus20/webpack-publish-extension/commit/400f25a88d20ddd3d07cece232bf6ab93a0837c8))
+- add branch checking ([245c8e5fa606f83f2ca1ea2d8cc1a1eaa0ccc356](https://github.com/alfonsus20/webpack-publish-extension/commit/245c8e5fa606f83f2ca1ea2d8cc1a1eaa0ccc356))
+- update CI ([a7ffc80224de31144b5b3683a0125c14d68c2fb5](https://github.com/alfonsus20/webpack-publish-extension/commit/a7ffc80224de31144b5b3683a0125c14d68c2fb5))
+- add publish options ([18a4f5fe5b64c4ce0bcd3709d70f3e4698862390](https://github.com/alfonsus20/webpack-publish-extension/commit/18a4f5fe5b64c4ce0bcd3709d70f3e4698862390))
+- add publish input ([0fb0b7b1e2d97f255a420c8123b9a7380b1c2ce9](https://github.com/alfonsus20/webpack-publish-extension/commit/0fb0b7b1e2d97f255a420c8123b9a7380b1c2ce9))
+- add upload artifact ([2f7acf946ec916b237f7708238d6b3afe0ea3d91](https://github.com/alfonsus20/webpack-publish-extension/commit/2f7acf946ec916b237f7708238d6b3afe0ea3d91))
+- add unzip ([9fd8873935e1d22e2a60719b15149487661498d3](https://github.com/alfonsus20/webpack-publish-extension/commit/9fd8873935e1d22e2a60719b15149487661498d3))
+- update CI ([62d23df2bf38d9db51a06db3e305f8b17f6f7df4](https://github.com/alfonsus20/webpack-publish-extension/commit/62d23df2bf38d9db51a06db3e305f8b17f6f7df4))
+- fix zipping process ([2297b0790aa29408cf299415d6d9b53434d6dc72](https://github.com/alfonsus20/webpack-publish-extension/commit/2297b0790aa29408cf299415d6d9b53434d6dc72))
+- rename workflow ([154d23270d48c3672f108966a4be13c45140109d](https://github.com/alfonsus20/webpack-publish-extension/commit/154d23270d48c3672f108966a4be13c45140109d))
+- chore: bump version in manifest-prod.json to patch ([1ff9592848407725c72b30192b32441088a2b884](https://github.com/alfonsus20/webpack-publish-extension/commit/1ff9592848407725c72b30192b32441088a2b884))
+- chore: bump version in manifest-stg.json to patch ([06058b8cc79034e768996247e510e8244eea026d](https://github.com/alfonsus20/webpack-publish-extension/commit/06058b8cc79034e768996247e510e8244eea026d))
+- chore: bump version in manifest-stg.json to patch ([77cdd00039aa712c56c36943e235f18c48519b19](https://github.com/alfonsus20/webpack-publish-extension/commit/77cdd00039aa712c56c36943e235f18c48519b19))
+- chore: bump version in manifest-stg.json to patch ([d981e28541d18c68662824935f92d4d0abc1a84a](https://github.com/alfonsus20/webpack-publish-extension/commit/d981e28541d18c68662824935f92d4d0abc1a84a))
+- chore: bump version in manifest-stg.json to patch ([041e90b102117b31251cdea0741cd268a339f7e8](https://github.com/alfonsus20/webpack-publish-extension/commit/041e90b102117b31251cdea0741cd268a339f7e8))
+- chore: bump version in manifest-stg.json to patch ([15546871d5f6b29d5b1848a5a73dfbf2decc7959](https://github.com/alfonsus20/webpack-publish-extension/commit/15546871d5f6b29d5b1848a5a73dfbf2decc7959))
+- rename workflows ([8508fa88da9289871397bd4b15fee2e8bd14dd78](https://github.com/alfonsus20/webpack-publish-extension/commit/8508fa88da9289871397bd4b15fee2e8bd14dd78))
 ## [v1.1.69-production] - 2025-01-30
 - add repo url ([5d889dc777d0ec11b1b5cd6dbeabfcd7854065de](https://github.com/alfonsus20/webpack-publish-extension/commit/5d889dc777d0ec11b1b5cd6dbeabfcd7854065de))
 - update handle bars ([ba3e4b4cb072d4c26d855f11a39668d66c6ccbbc](https://github.com/alfonsus20/webpack-publish-extension/commit/ba3e4b4cb072d4c26d855f11a39668d66c6ccbbc))
