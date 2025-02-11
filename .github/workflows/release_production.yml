@@ -133,4 +133,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pmt-extension_${{ env.CURRENT_TAG }}
-          path: extension-production.zip
+          path: dist
