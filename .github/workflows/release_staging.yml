@@ -88,7 +88,7 @@ jobs:
         uses: qoomon/actions--create-commit@v1.2.1
         id: commit-version-bump
         with:
-          message: "chore: bump version in manifest-stg.json to ${{ env.CURRENT_VERSION }} => ${{ github.event.inputs.bump-type }}"
+          message: "chore: bump version in manifest-stg.json to ${{ env.CURRENT_VERSION }} (${{ github.event.inputs.bump-type }})"
           skip-empty: true
 
       - name: Push changes
