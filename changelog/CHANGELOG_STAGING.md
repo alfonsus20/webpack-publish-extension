@@ -1,4 +1,9 @@
 # Staging Changelog
+## [v1.3.11-staging] - 2025-02-12
+- add version in commit msg ([0b4387636affaa8ba6a7c6f8eb190a5f6de10532](https://github.com/alfonsus20/webpack-publish-extension/commit/0b4387636affaa8ba6a7c6f8eb190a5f6de10532))
+- update ([be16361c6954e48d642b14ab842483f9acb9520f](https://github.com/alfonsus20/webpack-publish-extension/commit/be16361c6954e48d642b14ab842483f9acb9520f))
+- update syntax ([53f9c59d29422d68a054ee0de3d0ecf5eeb25716](https://github.com/alfonsus20/webpack-publish-extension/commit/53f9c59d29422d68a054ee0de3d0ecf5eeb25716))
+- chore: bump version in manifest-stg.json to 1.3.11 =&gt; patch ([e92c904259ca51e726919a68e3d43476fda69385](https://github.com/alfonsus20/webpack-publish-extension/commit/e92c904259ca51e726919a68e3d43476fda69385))
 ## [v1.3.10-staging] - 2025-02-12
 - chore: bump version in manifest-stg.json to patch ([88e6d2bbab733b2980bdd6eb4bdab15ada4a6dec](https://github.com/alfonsus20/webpack-publish-extension/commit/88e6d2bbab733b2980bdd6eb4bdab15ada4a6dec))
 ## [v1.3.9-staging] - 2025-02-12
