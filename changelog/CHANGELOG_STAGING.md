@@ -1,4 +1,6 @@
 # Staging Changelog
+## [v1.3.8-staging] - 2025-02-12
+- chore: bump version in manifest-stg.json to patch ([699fc54fdd0fa638572b85ec3dac1ccb474bd1b9](https://github.com/alfonsus20/webpack-publish-extension/commit/699fc54fdd0fa638572b85ec3dac1ccb474bd1b9))
 ## [v1.3.7-staging] - 2025-02-11
 - Update artifact paths in release workflows ([030fa9b12b224f8aee656420bde751f3b3d0a341](https://github.com/alfonsus20/webpack-publish-extension/commit/030fa9b12b224f8aee656420bde751f3b3d0a341))
 - chore: bump version in manifest-stg.json to patch ([d4127d45c167e1213286a5de14ccf371f16010af](https://github.com/alfonsus20/webpack-publish-extension/commit/d4127d45c167e1213286a5de14ccf371f16010af))
