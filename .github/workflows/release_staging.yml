@@ -77,21 +77,22 @@ jobs:
       - name: Add Version Bump Changes
         run: git add public/manifest-stg.json
 
-      - name: Add and Commit Version Bump
-        uses: qoomon/actions--create-commit@v1.2.1
-        id: commit-version-bump
-        with:
-          message: "chore: bump version in manifest-stg.json to ${{ github.event.inputs.bump-type }}"
-          skip-empty: true
-
-      - name: Push changes
-        run: git push origin main
-
       - name: Store Current Tag
         run: |
           VERSION=$(node -pe "require('./public/manifest-stg.json').version")
           TAG="v${VERSION}-staging"
           echo "CURRENT_TAG=$TAG" >> $GITHUB_ENV
+          echo "CURRENT_VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Add and Commit Version Bump
+        uses: qoomon/actions--create-commit@v1.2.1
+        id: commit-version-bump
+        with:
+          message: "chore: bump version in manifest-stg.json to ${{ env.CURRENT_VERSION }} (${{ github.event.inputs.bump-type }})"
+          skip-empty: true
+
+      - name: Push changes
+        run: git push origin main
 
       - name: Create Git Tag
         uses: qoomon/actions--create-tag@v1
@@ -127,7 +128,7 @@ jobs:
 
       - name: Check zip file
         run: unzip -l extension-staging.zip
-      
+
       - name: Upload extension as artifact
         uses: actions/upload-artifact@v4
         with:
